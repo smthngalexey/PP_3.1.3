@@ -27,7 +27,7 @@ public class AdminController {
         model.addAttribute("createUser", new User());
         model.addAttribute("users", userService.getListUsers());
         model.addAttribute("listRoles", roleService.getAllRoles());
-        model.addAttribute("admin", currentUser);
+        model.addAttribute("currentUser", currentUser);
         return "admin";
     }
 
