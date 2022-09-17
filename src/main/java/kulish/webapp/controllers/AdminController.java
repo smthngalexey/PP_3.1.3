@@ -43,8 +43,8 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @PutMapping("/admin/edit")
-    public String updateUser(@ModelAttribute("editUser") User user) {
+    @PutMapping("/admin/edit/{id}")
+    public String updateUser(@ModelAttribute("user")User user, @PathVariable("id") Long id) {
         userService.updateUser(user);
         return "redirect:/admin";
     }
