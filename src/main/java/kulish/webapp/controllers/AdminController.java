@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
 @Controller
 public class AdminController {
 
@@ -24,6 +25,7 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String getAllUsers(Model model, @AuthenticationPrincipal User currentUser) {
+
         model.addAttribute("createUser", new User());
         model.addAttribute("users", userService.getListUsers());
         model.addAttribute("listRoles", roleService.getAllRoles());
@@ -31,22 +33,22 @@ public class AdminController {
         return "admin";
     }
 
-    @GetMapping("/admin/user/{id}")
+    @GetMapping("/admin/edit/{id}")
     public String findUser(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.findUserById(id));
         return "admin";
     }
 
     @PostMapping("/admin/create")
-    public String saveUser(@ModelAttribute("createUser") User user) {
+    public String createUser(@ModelAttribute("user") User user) {
         userService.addUser(user);
         return "redirect:/admin";
     }
 
-    @PutMapping("/admin/edit/{id}")
-    public String updateUser(@ModelAttribute("user")User user, @PathVariable("id") Long id) {
+    @PutMapping("/admin/{id}")
+    public String updateUser(@ModelAttribute("user") User user) {
         userService.updateUser(user);
-        return "redirect:/admin";
+        return "redirect:/admin/";
     }
 
     @DeleteMapping("/admin/delete/{id}")
